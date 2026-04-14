@@ -4,6 +4,8 @@
 # checks citations, and generates an answer.
 
 import os
+import time
+from monitor import log_query
 from langsmith import traceable
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -49,9 +51,13 @@ ANSWER:"""
 @traceable
 def ask(query: str) -> dict:
     """Full RAG chain — retrieve, check, answer."""
+    start_time = time.time()
+
     chunks = retrieve(query)
 
     if not check_citations(chunks):
+        latency = time.time() - start_time
+        log_query(query, "Declined", latency, [], True, [])
         return {
             "answer": "I couldn't find relevant information in your study materials.",
             "sources": [],
@@ -69,6 +75,9 @@ def ask(query: str) -> dict:
 
     answer = response.choices[0].message.content.strip()
     sources = list({os.path.basename(c.get("source", "unknown")) for c in chunks})
+    latency = time.time() - start_time
+
+    log_query(query, answer, latency, chunks, False, sources)
 
     return {
         "answer": answer,
