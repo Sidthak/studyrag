@@ -4,6 +4,7 @@
 # checks citations, and generates an answer.
 
 import os
+from langsmith import traceable
 from dotenv import load_dotenv
 from openai import OpenAI
 from retrieve import retrieve
@@ -45,6 +46,7 @@ QUESTION: {query}
 ANSWER:"""
 
 
+@traceable
 def ask(query: str) -> dict:
     """Full RAG chain — retrieve, check, answer."""
     chunks = retrieve(query)
