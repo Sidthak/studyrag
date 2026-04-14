@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What are the three types of machine learning?",
+    "ground_truth": "The three types of machine learning are: 1) Supervised learning, where models are trained on labeled data with correct answers. 2) Unsupervised learning, where models find hidden patterns in unlabeled data. 3) Reinforcement learning, where an agent learns by receiving rewards or penalties from taking actions in an environment."
+  },
+  {
+    "question": "What is overfitting in machine learning?",
+    "ground_truth": "Overfitting happens when a model learns the training data too well, including noise and random variations, and then performs poorly on new unseen data. Signs include very high accuracy on training data but much lower accuracy on test data. Solutions include using more training data, regularization techniques, simpler models, or dropout for neural networks."
+  },
+  {
+    "question": "What is backpropagation?",
+    "ground_truth": "Backpropagation is how neural networks learn through a forward pass producing a prediction, calculating the loss, a backward pass computing gradients using the chain rule, and updating weights via gradient descent. This repeats for many training examples over multiple epochs."
+  },
+  {
+    "question": "What is RAG and what problem does it solve?",
+    "ground_truth": "RAG stands for Retrieval Augmented Generation. It solves three key problems: knowledge cutoff (LLMs only know training data), context window limits (can't paste entire knowledge bases), and hallucination (models state incorrect information). RAG retrieves relevant document pieces and has the LLM answer using only that context."
+  },
+  {
+    "question": "What is temperature in LLMs?",
+    "ground_truth": "Temperature controls how random an LLM output is. Temperature 0 is deterministic and best for factual questions. Temperature 0.7 is the typical default with some creativity. Temperature 1.0 and above is very random. For RAG systems needing factual answers, use low temperature of 0.1 to 0.2."
+  },
+  {
+    "question": "What are vector embeddings and why are they used in RAG?",
+    "ground_truth": "Vector embeddings convert text into lists of numbers capturing meaning, so similar meanings produce similar vectors. In RAG, each document chunk is converted to a vector and stored in a vector database. At query time, the question is also embedded and the closest matching chunks are retrieved through semantic search."
+  },
+  {
+    "question": "What is hallucination in LLMs?",
+    "ground_truth": "Hallucination is when an LLM confidently states something false. It happens because LLMs predict plausible text rather than verify facts. It can be reduced by using RAG to ground responses in real documents, citation enforcement, asking the model to reason step by step, and using lower temperature settings."
+  },
+  {
+    "question": "What is the attention mechanism in transformers?",
+    "ground_truth": "The attention mechanism allows every word to look at every other word and calculate how much attention to pay to each. This captures contextual relationships, for example understanding that bank means riverbank when the word river appears nearby. Multi-head attention runs this process multiple times in parallel with different learned weights."
+  },
+  {
+    "question": "What is fine-tuning and when should you use it instead of RAG?",
+    "ground_truth": "Fine-tuning actually updates the model weights by training on new data. It is more expensive than RAG and requires training data and compute. Use fine-tuning when consistent style or specialized task performance is needed and prompting alone fails. Use RAG when you need question-answering over documents or want to keep knowledge up to date without retraining."
+  },
+  {
+    "question": "What are the key Ragas metrics for evaluating a RAG system?",
+    "ground_truth": "The key Ragas metrics are: Faithfulness measuring whether the answer only uses retrieved context, Answer Relevancy measuring whether the answer addresses the question, Context Recall measuring whether retrieved chunks contain the needed information, and Context Precision measuring whether retrieved chunks are actually relevant. Production thresholds of 0.70 for faithfulness and answer relevancy and 0.60 for context recall are reasonable starting points."
+  }
+]
